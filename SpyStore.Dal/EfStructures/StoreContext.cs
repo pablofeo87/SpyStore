@@ -13,9 +13,15 @@ namespace SpyStore.Dal.EfStructures
         {
 
         }
+
+        public DbSet<Category> Categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.HasIndex(e => e.EmailAddress).HasName("IX_Customers").IsUnique();
+            });
         }
     }
 }
